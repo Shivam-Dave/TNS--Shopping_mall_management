@@ -1,0 +1,141 @@
+/* --- GLOBAL STYLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+// Define a new, vibrant color palette
+:root {
+  --primary-color: #6a11cb;
+  --secondary-color: #2575fc;
+  --accent-color: #ff5252;
+  --text-color: #333;
+  --bg-white: #ffffff;
+  --border-color: #dee2e6;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  // A vibrant gradient background for the entire page
+  background: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+  background-attachment: fixed;
+  color: var(--text-color);
+}
+
+.main-content {
+  padding-top: 80px; // Adjusted for the taller navbar
+}
+
+/* --- REDESIGNED NAVIGATION BAR --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // "Glassmorphism" effect for a modern look
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 0 2.5rem;
+  height: 70px;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.navbar-brand a {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.nav-links a {
+  margin-left: 2rem;
+  text-decoration: none;
+  color: #555;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.3s;
+
+  // Underline animation on hover
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease-out;
+  }
+
+  &:hover, &.active-link {
+    color: var(--secondary-color);
+  }
+
+  &:hover::after, &.active-link::after {
+    width: 100%;
+  }
+}
+
+/* --- REDESIGNED BUTTONS --- */
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 50px; // Pill shape
+  transition: all 0.2s ease-in-out;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  color: var(--bg-white);
+  // Gradient background for primary buttons
+  background-image: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.btn-secondary {
+  color: #555;
+  background-color: #e9ecef;
+  border-color: #e9ecef;
+  &:hover {
+    background-color: #ced4da;
+  }
+}
+
+.btn-outline-primary {
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  &:hover {
+    color: var(--bg-white);
+    background-color: var(--secondary-color);
+  }
+}
+
+.btn-outline-danger {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+   &:hover {
+    color: var(--bg-white);
+    background-color: var(--accent-color);
+  }
+}
+
+.btn-sm {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}

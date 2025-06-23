@@ -1,0 +1,44 @@
+<div class="storefront-container">
+    <!-- Main content: Item Grid -->
+    <div class="item-grid">
+      <div class="card item-card" *ngFor="let item of allItems">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <p class="card-price">{{ item.price | currency:'INR' }}</p>
+          <p class="card-stock">Stock: {{ item.quantity }}</p>
+          <button class="btn btn-primary" (click)="addToCart(item)" [disabled]="item.quantity === 0">
+            {{ item.quantity > 0 ? 'Add to Cart' : 'Out of Stock' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sidebar: Shopping Cart -->
+    <div class="cart-sidebar card">
+      <div class="card-header">
+        <h4>Shopping Cart</h4>
+      </div>
+      <div class="card-body">
+        <div *ngIf="cartItems.length === 0" class="empty-cart">
+          Your cart is empty.
+        </div>
+        <ul class="cart-items-list" *ngIf="cartItems.length > 0">
+          <li *ngFor="let cartItem of cartItems">
+            <span>{{ cartItem.item.name }} x {{ cartItem.quantity }}</span>
+            <span>{{ (cartItem.item.price * cartItem.quantity) | currency:'INR' }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer" *ngIf="cartItems.length > 0">
+        <div class="cart-total">
+          <strong>Total:</strong>
+          <strong>{{ cartTotal | currency:'INR' }}</strong>
+        </div>
+        <button class="btn btn-success btn-block" (click)="placeOrder()">
+          Place Order
+        </button>
+      </div>
+    </div>
+  </div>
+  

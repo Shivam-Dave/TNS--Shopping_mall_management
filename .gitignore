@@ -1,0 +1,17 @@
+# Spring Boot backend (Sprint_1_backend)
+Shopping_mall_management_system/Sprint_1_backend/target/
+Shopping_mall_management_system/Sprint_1_backend/.settings/
+Shopping_mall_management_system/Sprint_1_backend/.classpath
+Shopping_mall_management_system/Sprint_1_backend/.project
+Shopping_mall_management_system/Sprint_1_backend/.mvn/
+
+# Angular frontend (Sprint_2_frontend)
+Shopping_mall_management_system/Sprint_2_frontend/mall-gui-final/node_modules/
+Shopping_mall_management_system/Sprint_2_frontend/mall-gui-final/dist/
+Shopping_mall_management_system/Sprint_2_frontend/mall-gui-final/.angular/
+
+# General files to ignore
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

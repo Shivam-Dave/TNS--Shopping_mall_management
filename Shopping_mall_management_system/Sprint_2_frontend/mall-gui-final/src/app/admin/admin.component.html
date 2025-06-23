@@ -1,0 +1,88 @@
+<div class="admin-container">
+  <!-- Left Column: Form for Adding/Editing Admins -->
+  <div class="form-container card">
+    <h3 class="card-header">{{ isEditing ? 'Edit Admin' : 'Add New Admin' }}</h3>
+    <div class="card-body">
+      <form #adminForm="ngForm" (ngSubmit)="onFormSubmit(adminForm)">
+        <!-- Username Field -->
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" class="form-control" placeholder="Enter username" required #username="ngModel" [ngModel]="selectedAdmin?.username" />
+          <div *ngIf="username.invalid && username.touched" class="text-danger">Username is required.</div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter new password or leave blank" [required]="!isEditing" #password="ngModel" ngModel />
+            <small class="form-text text-muted" *ngIf="isEditing">Leave blank to keep current password.</small>
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter email address" required email #email="ngModel" [ngModel]="selectedAdmin?.email" />
+          <div *ngIf="email.invalid && email.touched" class="text-danger">
+              <span *ngIf="email.errors?.['required']">Email is required.</span>
+              <span *ngIf="email.errors?.['email']">Please enter a valid email.</span>
+          </div>
+        </div>
+
+        <!-- Login Attempts (Visible only when editing) -->
+        <div class="form-group" *ngIf="isEditing">
+            <label for="loginAttempts">Login Attempts</label>
+            <input type="number" id="loginAttempts" name="loginAttempts" class="form-control" [ngModel]="selectedAdmin?.loginAttempts" disabled />
+        </div>
+
+
+        <!-- Action Buttons -->
+        <div class="button-group">
+          <button type="submit" class="btn btn-primary" [disabled]="adminForm.invalid">
+            {{ isEditing ? 'Update Admin' : 'Save Admin' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="resetForm(adminForm)">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Right Column: Table of Admins -->
+  <div class="table-container card">
+     <h3 class="card-header">Admin List</h3>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Login Attempts</th>
+            <th>Last Login</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let admin of admins">
+            <td>{{ admin.mallAdminId }}</td>
+            <td>{{ admin.username }}</td>
+            <td>{{ admin.email }}</td>
+            <!-- FIX: Displaying the actual password -->
+            <td>{{ admin.password }}</td>
+            <td>{{ admin.loginAttempts }}</td>
+            <td>{{ admin.lastLoginTime | date:'short' }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary" (click)="onEdit(admin)">Edit</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="onDelete(admin.mallAdminId)">Delete</button>
+            </td>
+          </tr>
+          <tr *ngIf="admins.length === 0">
+              <td colspan="7" class="text-center">No admins found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

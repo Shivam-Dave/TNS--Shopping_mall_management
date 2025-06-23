@@ -1,0 +1,65 @@
+<div class="shop-owner-container">
+  <!-- Form Column -->
+  <div class="form-container card">
+    <h3 class="card-header">{{ isEditing ? 'Edit Shop Owner' : 'Add New Shop Owner' }}</h3>
+    <div class="card-body">
+      <form #ownerForm="ngForm" (ngSubmit)="onFormSubmit(ownerForm)">
+        <div class="form-group">
+          <label for="name">Owner Name</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="Enter owner's name" required #name="ngModel" [ngModel]="selectedOwner?.name" />
+          <div *ngIf="name.invalid && name.touched" class="text-danger">Name is required.</div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter email" required email #email="ngModel" [ngModel]="selectedOwner?.email" />
+           <div *ngIf="email.invalid && email.touched" class="text-danger">A valid email is required.</div>
+        </div>
+        <div class="form-group">
+          <label for="shopName">Shop Name</label>
+          <input type="text" id="shopName" name="shopName" class="form-control" placeholder="Enter shop name" required #shopName="ngModel" [ngModel]="selectedOwner?.shopName" />
+          <div *ngIf="shopName.invalid && shopName.touched" class="text-danger">Shop name is required.</div>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="btn btn-primary" [disabled]="ownerForm.invalid">{{ isEditing ? 'Update' : 'Save' }}</button>
+          <button type="button" class="btn btn-secondary" (click)="resetForm(ownerForm)">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Table Column -->
+  <div class="table-container card">
+     <h3 class="card-header">Shop Owner List</h3>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Owner Name</th>
+            <th>Email</th>
+            <th>Shop Name</th>
+            <th>Registered On</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- FIX: Changed the loop variable from 'owner' to 'shopOwner' to match the component logic -->
+          <tr *ngFor="let shopOwner of shopOwners">
+            <td>{{ shopOwner.id }}</td>
+            <td>{{ shopOwner.name }}</td>
+            <td>{{ shopOwner.email }}</td>
+            <td>{{ shopOwner.shopName }}</td>
+            <td>{{ shopOwner.registrationDate | date:'longDate' }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary" (click)="onEdit(shopOwner)">Edit</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="onDelete(shopOwner.id)">Delete</button>
+              <a [routerLink]="['/shopowner', shopOwner.id, 'items']" class="btn btn-sm btn-outline-secondary">Manage Items</a>
+            </td>
+          </tr>
+          <tr *ngIf="shopOwners.length === 0">
+              <td colspan="6" class="text-center">No shop owners found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

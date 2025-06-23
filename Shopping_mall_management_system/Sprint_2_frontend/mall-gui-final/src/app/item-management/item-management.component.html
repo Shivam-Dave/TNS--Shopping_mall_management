@@ -1,0 +1,59 @@
+<div class="item-management-container">
+    <!-- Form Column -->
+    <div class="form-container card">
+      <h3 class="card-header">Add New Item</h3>
+      <div class="card-body">
+        <form #itemForm="ngForm" (ngSubmit)="onFormSubmit(itemForm)">
+          <div class="form-group">
+            <label for="name">Item Name</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="e.g., T-Shirt" required [(ngModel)]="newItem.name">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" class="form-control" placeholder="Describe the item" required [(ngModel)]="newItem.description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Price (INR)</label>
+            <input type="number" id="price" name="price" class="form-control" placeholder="e.g., 999" required min="0" [(ngModel)]="newItem.price">
+          </div>
+          <div class="form-group">
+            <label for="quantity">Stock Quantity</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" placeholder="e.g., 50" required min="0" [(ngModel)]="newItem.quantity">
+          </div>
+          <div class="button-group">
+            <button type="submit" class="btn btn-primary" [disabled]="itemForm.invalid">Add Item</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Table Column -->
+    <div class="table-container card">
+       <h3 class="card-header">My Shop's Items</h3>
+      <div class="card-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items">
+              <td>{{ item.name }}</td>
+              <td>{{ item.price | currency:'INR' }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-danger" (click)="onDelete(item.id)">Delete</button>
+              </td>
+            </tr>
+            <tr *ngIf="items.length === 0">
+                <td colspan="4" class="text-center">No items found for this shop.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

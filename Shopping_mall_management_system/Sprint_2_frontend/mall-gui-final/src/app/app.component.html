@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/">Mall Management</a>
+  </div>
+  <div class="nav-links">
+    <a routerLink="/employees" routerLinkActive="active-link">Employees</a>
+    <a routerLink="/admins" routerLinkActive="active-link">Admins</a>
+    <a routerLink="/shopowners" routerLinkActive="active-link">Shop Owners</a>
+    <a routerLink="/customers" routerLinkActive="active-link">Customers</a>
+    <a routerLink="/store" routerLinkActive="active-link">Store</a>
+    <a routerLink="/orders" routerLinkActive="active-link">Orders</a>
+  </div>
+</nav>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
